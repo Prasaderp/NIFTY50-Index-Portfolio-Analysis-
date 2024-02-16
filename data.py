@@ -230,13 +230,6 @@ if st.sidebar.button("Calculate"):
     CAGR, volatility, sharpe_ratio = calculate_performance_metrics(portfolio.get_daily_returns_for_every_day(start_date, end_date), initial_investment, start_date, end_date)
     nifty_metrics = {'CAGR (%)': [round(CAGR,2)], 'Volatility (%)': [round(volatility,2)], 'Sharpe Ratio': [round(sharpe_ratio,2)], "Start Date" : start_date, "End Date" : end_date}
     df_nifty_metrics = pd.DataFrame(nifty_metrics)
-    st.subheader("Performance Metrics for Nifty Index")
-    st.write(df_nifty_metrics)
-
-    # Display selected stocks
-    st.subheader("Selected Stocks")
-    for i, symbol in enumerate(selected_stocks, start=1):
-        st.write(f"{i}. {symbol}")
 
     # Calculate initial investment per stock
     initial_investment_per_stock = initial_investment / len(selected_stocks)
@@ -256,3 +249,8 @@ if st.sidebar.button("Calculate"):
     df_selected_stocks_metrics = pd.DataFrame.from_records([selected_stocks_metrics, nifty_metrics], index=["Strategy","Benchmark"])
     st.subheader("Performance Metrics for Selected Stocks")
     st.write(df_selected_stocks_metrics)
+
+    # Display selected stocks
+    st.subheader("Selected Stocks")
+    for i, symbol in enumerate(selected_stocks, start=1):
+        st.write(f"{i}. {symbol}")
